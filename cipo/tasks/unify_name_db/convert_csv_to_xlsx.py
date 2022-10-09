@@ -23,4 +23,4 @@ def convert_csv_to_xlsx_v2(csvfile):
     df = df[:100]
     df.to_excel(csvfile[:-4] + '.xlsx')
 
-convert_csv_to_xlsx_v2('/mnt/d/work/cipo/20220930/application_distinct_st13_max_proc_date_clean_2.csv')
+convert_csv_to_xlsx_v2('cipo/tasks/unify_name_db/output/2022-10-08/applicant_distinct_st13_max_proc_date_clean.csv')
