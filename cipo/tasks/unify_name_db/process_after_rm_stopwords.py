@@ -1,8 +1,9 @@
 import pandas as pd
 from glob import glob
+import os
 
-RM = """-,.;!?@#$%^&*()/"«»' """
-print([c for c in RM])
+FOLDER = os.path.abspath(os.path.join(__file__, os.pardir))
+
 
 def merge():
     filelist = glob('/mnt/d/work/cipo/_applicant_remove_stop_word/*.csv')
@@ -17,15 +18,9 @@ def merge():
     return df_full
 
 def remove_dup_clean_name_clean_address():
-    df = merge()
-    df['legalentityname_fix'] = df.legalentityname_rm
+    df = pd.read_csv(f"{FOLDER}/output/2022-10-09/applicant_distinct_st13_max_proc_date_clean.csv")
+    df['legalentityname_fix'] = df.legalentityname_clean
     df['addresslinetext1_fix'] = df.addresslinetext1
-    for c in RM:
-        print(c)
-        df['legalentityname_fix'] = df.legalentityname_fix.str.lower().str.replace(c,"")
-        df['addresslinetext1_fix'] = df.addresslinetext1_fix.str.lower().str.replace(c,"")
-    
-    print(df[['legalentityname', 'legalentityname_fix']])
     df.st13applicationnumber = df.st13applicationnumber.astype(str)
     df.st13applicationnumber_relative = df.st13applicationnumber_relative.astype(str)
 
